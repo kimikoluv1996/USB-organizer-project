@@ -41,6 +41,10 @@ def main():
         print("Error: target must be a directory.")
         sys.exit()
 
+    print("[DRY RUN] NO files will be moved")
+    print(f"target: {target.absolute()}")
+    print(" ")
+    
     for item in target.iterdir():
         item_extension = item.suffix.lower()
         if item.is_file():
