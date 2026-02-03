@@ -10,3 +10,6 @@ work!
 # Usage:
 
 `python organizer.py /path/to/USB/stick [--apply]`
+
+## Note:
+This script runs in dry-run mode by default and will not modify files.

@@ -30,6 +30,10 @@ EXTENSION_CATEGORIES = {
     }
 }
 
+def categorize_files(file: Path):
+    for i in range(3):
+        pass
+
 def main():
     if len(sys.argv) < 2:
         print("usage: python organizer.py <directory> [--apply]")
@@ -44,14 +48,17 @@ def main():
     print("[DRY RUN] NO files will be moved")
     print(f"target: {target.absolute()}")
     print(" ")
-    
+
     for item in target.iterdir():
         item_extension = item.suffix.lower()
         if item.is_file():
             for category in EXTENSION_CATEGORIES.keys():
                 if item_extension in EXTENSION_CATEGORIES[category]:
                     item_key = category
-                    print(f"{item.name} -> {item_key}")
+                    print(f"Would move: {item.name} -> {item_key}/")
+        if item.is_dir():
+            print(f"Skipping Directory: {item.name}")
+            continue
             
 if __name__ == "__main__":
     main()
