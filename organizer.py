@@ -66,8 +66,11 @@ def main():
                     if apply_changes:
                         if not category_path.exists():
                             category_path.mkdir(exist_ok=True)  # only create directories in APPLY MODE, NOT in dry run
-                        shutil.move(f"{target.absolute()}/{item.name}", f"{target.absolute()}/{item_key}/")
-                        print(f"Moved: {item.name} -> {item_key}/{item.name}")
+                        try:
+                            shutil.move(f"{target.absolute()}/{item.name}", f"{target.absolute()}/{item_key}/")
+                            print(f"Moved: {item.name} -> {item_key}/{item.name}")
+                        except shutil.Error:
+                            print(f"Skipped: {category_path.absolute()}/{item.name} (already exists)")
                     else:
                         print(f"Would move: {item.name} -> {item_key}/")
         if item.is_dir():
