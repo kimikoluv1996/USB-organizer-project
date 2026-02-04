@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import shutil
 
 EXTENSION_CATEGORIES = {
     "Audio": {
@@ -51,7 +52,7 @@ def main():
         print("[APPLY MODE] Files will be moved")
     else:
         print("[DRY RUN] NO files will be moved")
-        
+
     print(f"target: {target.absolute()}")
     print(" ")
 
@@ -61,7 +62,14 @@ def main():
             for category in EXTENSION_CATEGORIES.keys():
                 if item_extension in EXTENSION_CATEGORIES[category]:
                     item_key = category
-                    print(f"Would move: {item.name} -> {item_key}/")
+                    category_path = target / category
+                    if apply_changes:
+                        if not category_path.exists():
+                            category_path.mkdir(exist_ok=True)  # only create directories in APPLY MODE, NOT in dry run
+                        shutil.move(f"{target.absolute()}/{item.name}", f"{target.absolute()}/{item_key}/")
+                        print(f"Moved: {item.name} -> {item_key}/{item.name}")
+                    else:
+                        print(f"Would move: {item.name} -> {item_key}/")
         if item.is_dir():
             print(f"Skipping Directory: {item.name}")
             continue
