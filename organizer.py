@@ -39,13 +39,19 @@ def main():
         print("usage: python organizer.py <directory> [--apply]")
         sys.exit()
 
+    apply_changes = "--apply" in sys.argv
+    
     target = Path(sys.argv[1])
 
     if not target.exists() or not target.is_dir():
         print("Error: target must be a directory.")
         sys.exit()
 
-    print("[DRY RUN] NO files will be moved")
+    if apply_changes:
+        print("[APPLY MODE] Files will be moved")
+    else:
+        print("[DRY RUN] NO files will be moved")
+        
     print(f"target: {target.absolute()}")
     print(" ")
 
