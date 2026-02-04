@@ -31,10 +31,6 @@ EXTENSION_CATEGORIES = {
     }
 }
 
-def categorize_files(file: Path):
-    for i in range(3):
-        pass
-
 def main():
     if len(sys.argv) < 2:
         print("usage: python organizer.py <directory> [--apply]")
