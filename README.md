@@ -7,6 +7,13 @@ Just point the script at any directory and it will list the files and propose
 a better directory structure. Just pass the `--apply` flag and it'll do the
 work!
 
+## Features
+- categorizes files by extension
+- dry-run mode by default
+- `--apply` flag moves files
+- creates category files automatically
+- never deletes files
+
 # Usage:
 
 `python organizer.py /path/to/USB/stick [--apply]`
